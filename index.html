@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>環境測定機器市場インタラクティブダッシュボード</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A dual-dashboard design is chosen to directly compare the two distinct markets discussed in the report: Heatstroke Prevention and Hypothermia Prevention. A top-level navigation allows users to easily switch between these two views. This structure is optimal for usability because the report clearly delineates the data, drivers, and maturity levels of these two segments. The Heatstroke section prominently features the impactful 2025 Japanese regulation as a key interactive element, followed by market growth charts and categorized drivers. The Hypothermia section reflects the report's findings of a less-defined market by visualizing related markets instead. This comparative structure allows users to quickly grasp the core findings: one market is mature and regulation-driven, while the other is nascent and fragmented. A final summary section synthesizes cross-cutting trends. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Heatstroke market forecast (2024-2033). Goal: Show change over time. Viz: Line Chart (Chart.js). Interaction: Hover tooltips for yearly data. Justification: A line chart is the most effective way to illustrate growth trends.
+        - Report Info: Japanese 2025 Regulation. Goal: Organize and inform complex requirements. Viz: Structured HTML/CSS diagram with icons. Interaction: N/A, focus on clear visual grouping. Justification: A visual diagram simplifies dense regulatory text, making it more digestible than a list.
+        - Report Info: Hypothermia-related markets (Temp Mgmt, Thermometers). Goal: Compare distinct but related markets. Viz: Bar Chart (Chart.js). Interaction: Hover tooltips for values and CAGR. Justification: A bar chart is ideal for comparing the scale and growth of separate categories.
+        - Report Info: Market Drivers (Tech, Demand). Goal: Organize detailed text. Viz: Tabbed interface (HTML/JS). Interaction: Click to switch content. Justification: Tabs conserve space and allow users to focus on one topic at a time, improving readability.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #F7F7F7;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        .nav-button.active {
+            background-color: #3B82F6;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .nav-button:not(.active) {
+            background-color: #FFFFFF;
+            color: #4B5563;
+        }
+        .tab-button.active {
+            border-bottom: 2px solid #3B82F6;
+            color: #3B82F6;
+            font-weight: 600;
+        }
+        .tab-button {
+            border-bottom: 2px solid transparent;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 text-center">環境測定機器市場分析ダッシュボード</h1>
+            <p class="text-center text-gray-500 mt-1">熱中症・低体温症対策市場の動向と予測</p>
+        </div>
+    </header>
+
+    <nav class="py-6 bg-gray-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center space-x-2 sm:space-x-4">
+            <button id="nav-heatstroke" class="nav-button py-2 px-4 sm:py-3 sm:px-6 rounded-full font-semibold text-sm sm:text-base">☀️ 熱中症対策市場</button>
+            <button id="nav-hypothermia" class="nav-button py-2 px-4 sm:py-3 sm:px-6 rounded-full font-semibold text-sm sm:text-base">❄️ 低体温症対策市場</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <section id="content-heatstroke" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-blue-600">熱中症対策環境測定機器市場</h2>
+                <p class="mt-2 text-lg text-gray-600">規制強化と技術革新が牽引する急成長市場</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-1">世界市場規模の予測 (デジタル熱中症計)</h3>
+                    <p class="text-gray-500 mb-4">健康・安全意識の高まりを背景に、年平均約10%の力強い成長が予測されています。</p>
+                    <div class="chart-container mx-auto">
+                        <canvas id="heatstrokeMarketChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 flex flex-col space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border border-gray-200 flex-grow">
+                        <h4 class="font-semibold text-gray-500">2024年 市場規模</h4>
+                        <p class="text-4xl font-bold text-blue-600 my-2">1.6<span class="text-2xl ml-1">億ドル</span></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border border-gray-200 flex-grow">
+                        <h4 class="font-semibold text-gray-500">2033年 予測市場規模</h4>
+                        <p class="text-4xl font-bold text-blue-600 my-2">3.3<span class="text-2xl ml-1">億ドル</span></p>
+                    </div>
+                     <div class="bg-white p-6 rounded-2xl shadow-lg text-center border border-gray-200 flex-grow">
+                        <h4 class="font-semibold text-gray-500">年平均成長率 (CAGR)</h4>
+                        <p class="text-4xl font-bold text-blue-600 my-2">~10<span class="text-2xl ml-1">%</span></p>
+                         <p class="text-xs text-gray-400">(2025-2033)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-inner border border-blue-200">
+                <h3 class="text-2xl font-bold text-center text-blue-800">市場の最重要ドライバー：日本の2025年規制改正</h3>
+                <p class="text-center mt-2 mb-6 text-gray-600">2025年6月1日施行の労働安全衛生規則改正により、WBGT値の測定・記録が義務化され、市場が大きく拡大します。</p>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="p-4 rounded-lg bg-gray-50">
+                            <div class="text-4xl mb-2">🌡️</div>
+                            <h4 class="font-bold text-lg">WBGT値の測定義務</h4>
+                            <p class="text-sm text-gray-600 mt-1">WBGT値が28℃以上、または気温31℃以上の環境で測定・記録が必須に。</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50">
+                            <div class="text-4xl mb-2">⏱️</div>
+                            <h4 class="font-bold text-lg">対象となる作業条件</h4>
+                            <p class="text-sm text-gray-600 mt-1">対象環境下で連続1時間以上、または1日合計4時間以上の作業が該当。</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50">
+                            <div class="text-4xl mb-2">📋</div>
+                            <h4 class="font-bold text-lg">事業者の義務</h4>
+                            <p class="text-sm text-gray-600 mt-1">休憩確保、水分補給、冷却設備の導入、予防教育などの措置が義務付け。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-center mb-6">その他の市場促進要因とトレンド</h3>
+                <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <div class="border-b border-gray-200 mb-4">
+                        <nav class="flex space-x-4" aria-label="Tabs">
+                            <button class="tab-button py-2 px-4 text-gray-500" data-tab="heat-tech">技術の進歩</button>
+                            <button class="tab-button py-2 px-4 text-gray-500" data-tab="heat-demand">産業からの需要</button>
+                            <button class="tab-button py-2 px-4 text-gray-500" data-tab="heat-players">主要プレイヤー</button>
+                        </nav>
+                    </div>
+                    <div id="tab-content-heat-tech" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">スマート機能、IoT、ウェアラブル</h4>
+                        <p class="text-gray-600">リアルタイムでのアラート、データ記録、遠隔監視を可能にするスマート機能やIoT統合が標準化しつつあります。特に、ヘルメットや手首に装着するウェアラブルセンサーは、個人の状態を継続的に監視し、パーソナライズされた予防策を提供するための重要なトレンドとなっています。厚生労働省の実証実験でもその有効性が示されており、産業界での導入が加速しています。</p>
+                    </div>
+                    <div id="tab-content-heat-demand" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">労働安全衛生が重要な産業</h4>
+                        <p class="text-gray-600">建設、製造、物流、農業、園芸など、屋外や高温環境での作業が避けられない産業が主要な需要源です。労働者の安全確保と生産性維持の観点から、正確な環境測定と予防措置への投資が不可欠となっています。</p>
+                    </div>
+                    <div id="tab-content-heat-players" class="tab-content">
+                        <h4 class="font-bold text-lg mb-2">国内外の主要企業</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><span class="font-semibold">グローバル:</span> Honeywell, 3M, Dräger, MSA Safety 等</li>
+                            <li><span class="font-semibold">日本 (WBGT計):</span> エー・アンド・デイ (A&D), 佐藤計量器製作所, 京都電子工業, タニタ 等</li>
+                            <li><span class="font-semibold">日本 (ウェアラブル):</span> ヒロ・コーポレーション, リンクサス, タイムマシーン 等</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="content-hypothermia" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-indigo-600">低体温症対策環境測定機器市場</h2>
+                <p class="mt-2 text-lg text-gray-600">市場は未成熟だが、関連分野は堅調に成長</p>
+            </div>
+            
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-200 mb-12">
+                <h3 class="text-xl font-bold mb-1">市場の現状：専門市場は未定義</h3>
+                <p class="text-gray-600">熱中症対策のような「低体温症予防専用の環境測定機器」という明確な市場は確立されていません。需要は主に、医療用の体温管理システムや、一般的な産業用温度・湿度計に内包されています。ここでは、その関連市場の規模と成長性を示します。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-1">関連市場の規模と予測</h3>
+                    <p class="text-gray-500 mb-4">医療用途が中心ですが、産業安全分野での応用も期待されます。</p>
+                    <div class="chart-container mx-auto">
+                        <canvas id="hypothermiaMarketChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-4">市場促進要因とトレンド</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-indigo-700">労働安全衛生からの需要</h4>
+                            <p class="text-gray-600 text-sm">事務所衛生基準規則などにより、事業者は職場を一定の温度（例：18℃以上28℃以下）に保つ努力義務があります。これを遵守するために、汎用的な温度・湿度計への需要が生まれます。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-indigo-700">技術革新</h4>
+                            <p class="text-gray-600 text-sm">高精度で耐久性の高い温度・湿度センサーの開発が進んでおり、過酷な寒冷環境下でも信頼性の高いモニタリングが可能になっています。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-indigo-700">市場の特性</h4>
+                            <p class="text-gray-600 text-sm">熱中症対策と異なり、特定の「寒冷ストレス指数」や測定器の導入を義務付ける強力な規制がないため、市場は断片的です。ソリューションは広範なビル管理システム等に統合される傾向があります。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-12">
+                <h3 class="text-2xl font-bold text-center mb-6">主要プレイヤーと製品</h3>
+                <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                     <p class="text-center text-gray-600 mb-4">専門メーカーは少なく、汎用的な温度計・センサーメーカーが市場を構成しています。</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">温度計メーカー</h4>
+                            <ul class="list-disc list-inside text-gray-600 text-sm">
+                                <li>3M, A&D, オムロン, テルモ 等</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">湿度センサーメーカー</h4>
+                            <ul class="list-disc list-inside text-gray-600 text-sm">
+                                <li>Honeywell, TE Connectivity 等</li>
+                            </ul>
+                        </div>
+                         <div class="sm:col-span-2">
+                            <h4 class="font-bold text-lg mb-2">その他</h4>
+                            <ul class="list-disc list-inside text-gray-600 text-sm">
+                                <li>赤外線サーモグラフィー (FLIR, Testo)</li>
+                                <li>特定用途製品 (例: 牛舎用寒冷ストレス計)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="content-summary" class="content-section">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-700">結論と将来展望</h2>
+                <p class="mt-2 text-lg text-gray-600">両市場に共通するトレンドと戦略的提言</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-2">市場機会と課題</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-green-600">機会</h4>
+                             <ul class="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                                <li>日本の規制改正による熱中症対策市場の爆発的成長。</li>
+                                <li>ウェアラブル、IoT技術の普及による高付加価値化。</li>
+                                <li>アジア太平洋地域の工業化に伴う安全意識の高まり。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-red-600">課題</h4>
+                             <ul class="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                                <li>低体温症対策市場の定義が曖昧で、ターゲット設定が困難。</li>
+                                <li>高機能なモニタリングソリューションのコスト。</li>
+                                <li>サプライチェーンの混乱リスク。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-2">戦略的提言</h3>
+                     <ul class="list-disc list-inside text-gray-600 mt-2 space-y-2">
+                        <li><span class="font-semibold">熱中症対策:</span> 日本の規制に対応した、データ記録・通信機能付きWBGT計やウェアラブルデバイスの開発を優先する。使いやすさと規制遵守をアピールする。</li>
+                        <li><span class="font-semibold">低体温症対策:</span> 専用機ではなく、既存のビル管理やHVACシステムに統合できる高精度センサーに注力する。ニッチな産業用途を開拓する。</li>
+                        <li><span class="font-semibold">共通:</span> センサーの小型化とコスト削減を進め、導入のハードルを下げる。データサービス等のサブスクリプションモデルも検討する。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-6">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>このダッシュボードは提供された市場調査レポートに基づき生成されました。</p>
+            <p>&copy; 2025 Interactive Market Analysis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const heatstrokeNav = document.getElementById('nav-heatstroke');
+            const hypothermiaNav = document.getElementById('nav-hypothermia');
+            
+            const heatstrokeContent = document.getElementById('content-heatstroke');
+            const hypothermiaContent = document.getElementById('content-hypothermia');
+            const summaryContent = document.getElementById('content-summary');
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            let heatstrokeChart = null;
+            let hypothermiaChart = null;
+
+            function showSection(section) {
+                heatstrokeContent.classList.remove('active');
+                hypothermiaContent.classList.remove('active');
+                summaryContent.classList.remove('active');
+
+                heatstrokeNav.classList.remove('active');
+                hypothermiaNav.classList.remove('active');
+
+                if (section === 'heatstroke') {
+                    heatstrokeContent.classList.add('active');
+                    heatstrokeNav.classList.add('active');
+                    if (!heatstrokeChart) {
+                        renderHeatstrokeChart();
+                    }
+                } else if (section === 'hypothermia') {
+                    hypothermiaContent.classList.add('active');
+                    hypothermiaNav.classList.add('active');
+                    if (!hypothermiaChart) {
+                        renderHypothermiaChart();
+                    }
+                }
+            }
+
+            heatstrokeNav.addEventListener('click', () => showSection('heatstroke'));
+            hypothermiaNav.addEventListener('click', () => showSection('hypothermia'));
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        if(btn.dataset.tab.startsWith(tabId.split('-')[0])) {
+                           document.getElementById(`tab-content-${btn.dataset.tab}`).classList.remove('active');
+                        }
+                    });
+
+                    button.classList.add('active');
+                    document.getElementById(`tab-content-${tabId}`).classList.add('active');
+                });
+            });
+
+            function renderHeatstrokeChart() {
+                const ctx = document.getElementById('heatstrokeMarketChart').getContext('2d');
+                heatstrokeChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033'],
+                        datasets: [{
+                            label: '市場規模 (億ドル)',
+                            data: [1.60, 1.76, 1.94, 2.13, 2.34, 2.57, 2.83, 3.01, 3.15, 3.30],
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#3B82F6',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: { display: true, text: '市場規模 (億ドル)' }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.dataset.label}: ${context.parsed.y}億ドル`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function renderHypothermiaChart() {
+                const ctx = document.getElementById('hypothermiaMarketChart').getContext('2d');
+                hypothermiaChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['体温管理市場', '温度計市場', '湿度センサー市場'],
+                        datasets: [{
+                            label: '2024年 市場規模 (億ドル)',
+                            data: [32.1, 1.9, 6.9],
+                            backgroundColor: ['#6366F1', '#A78BFA', '#818CF8'],
+                            borderColor: ['#4F46E5', '#8B5CF6', '#6D28D9'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                title: { display: true, text: '市場規模 (億ドル)' }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.dataset.label || '';
+                                        const value = context.parsed.x;
+                                        let cagr = '';
+                                        if (context.dataIndex === 0) cagr = ' (CAGR: 3.88%)';
+                                        if (context.dataIndex === 1) cagr = ' (CAGR: 6.5%)';
+                                        if (context.dataIndex === 2) cagr = ' (CAGR: 7.66%)';
+                                        return `${label}: ${value}億ドル${cagr}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            showSection('heatstroke');
+            document.querySelector('[data-tab="heat-tech"]').click();
+        });
+    </script>
+
+</body>
+</html>
