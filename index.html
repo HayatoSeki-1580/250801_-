@@ -72,6 +72,18 @@
         .card-gradient {
             background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
         }
+        sup {
+            font-size: 0.6em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        sup a {
+            color: #3B82F6;
+            text-decoration: none;
+        }
+        sup a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -87,6 +99,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center space-x-2 sm:space-x-4">
             <button id="nav-heatstroke" class="nav-button py-2 px-4 sm:py-3 sm:px-6 rounded-full font-semibold text-sm sm:text-base">☀️ 熱中症対策市場</button>
             <button id="nav-hypothermia" class="nav-button py-2 px-4 sm:py-3 sm:px-6 rounded-full font-semibold text-sm sm:text-base">❄️ 低体温症対策市場</button>
+            <button id="nav-summary" class="nav-button py-2 px-4 sm:py-3 sm:px-6 rounded-full font-semibold text-sm sm:text-base">📊 全体概要と展望</button>
         </div>
     </nav>
 
@@ -101,7 +114,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                 <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
                     <h3 class="text-xl font-bold mb-1">世界市場規模の予測 (デジタル熱中症計)</h3>
-                    <p class="text-gray-500 mb-4">健康・安全意識の高まりを背景に、年平均約10%の力強い成長が予測されています。</p>
+                    <p class="text-gray-500 mb-4">健康・安全意識の高まりを背景に、年平均約10%の力強い成長が予測されています<sup><a href="#ref1">[1]</a></sup>。</p>
                     <div class="chart-container mx-auto">
                         <canvas id="heatstrokeMarketChart"></canvas>
                     </div>
@@ -119,33 +132,34 @@
                      <div class="bg-white p-6 rounded-2xl shadow-lg text-center border border-gray-200 flex-grow">
                         <h4 class="font-semibold text-gray-500">年平均成長率 (CAGR)</h4>
                         <p class="text-4xl font-bold text-blue-600 my-2">~10<span class="text-2xl ml-1">%</span></p>
-                         <p class="text-xs text-gray-400">(2025-2033)</p>
+                         <p class="text-xs text-gray-400">(2025-2033)<sup><a href="#ref1">[1]</a></sup></p>
                     </div>
                 </div>
             </div>
 
             <div class="mt-12 bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-inner border border-blue-200">
                 <h3 class="text-2xl font-bold text-center text-blue-800">市場の最重要ドライバー：日本の2025年規制改正</h3>
-                <p class="text-center mt-2 mb-6 text-gray-600">2025年6月1日施行の労働安全衛生規則改正により、WBGT値の測定・記録が義務化され、市場が大きく拡大します。</p>
+                <p class="text-center mt-2 mb-6 text-gray-600">2025年6月1日施行の労働安全衛生規則改正により、WBGT値の測定・記録が義務化され、市場が大きく拡大します<sup><a href="#ref4">[4]</a></sup>。</p>
                 <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                         <div class="p-4 rounded-lg bg-gray-50">
                             <div class="text-4xl mb-2">🌡️</div>
                             <h4 class="font-bold text-lg">WBGT値の測定義務</h4>
-                            <p class="text-sm text-gray-600 mt-1">WBGT値が28℃以上、または気温31℃以上の環境で測定・記録が必須に。</p>
+                            <p class="text-sm text-gray-600 mt-1">WBGT値が28℃以上、または気温31℃以上の環境で測定・記録が必須に<sup><a href="#ref4">[4]</a></sup>。</p>
                         </div>
                         <div class="p-4 rounded-lg bg-gray-50">
                             <div class="text-4xl mb-2">⏱️</div>
                             <h4 class="font-bold text-lg">対象となる作業条件</h4>
-                            <p class="text-sm text-gray-600 mt-1">対象環境下で連続1時間以上、または1日合計4時間以上の作業が該当。</p>
+                            <p class="text-sm text-gray-600 mt-1">対象環境下で連続1時間以上、または1日合計4時間以上の作業が該当<sup><a href="#ref4">[4]</a></sup>。</p>
                         </div>
                         <div class="p-4 rounded-lg bg-gray-50">
                             <div class="text-4xl mb-2">📋</div>
                             <h4 class="font-bold text-lg">事業者の義務</h4>
-                            <p class="text-sm text-gray-600 mt-1">休憩確保、水分補給、冷却設備の導入、予防教育などの措置が義務付け。</p>
+                            <p class="text-sm text-gray-600 mt-1">休憩確保、水分補給、冷却設備の導入、予防教育などの措置が義務付け<sup><a href="#ref4">[4]</a></sup>。</p>
                         </div>
                     </div>
                 </div>
+                <p class="text-center text-xs text-gray-500 mt-4">この改正は、製造業、建設業、物流センター、農業、さらには空調が不十分なオフィスなど、多岐にわたる業種に適用されます<sup><a href="#ref5">[5]</a></sup>。</p>
             </div>
 
             <div class="mt-12">
@@ -160,7 +174,7 @@
                     </div>
                     <div id="tab-content-heat-tech" class="tab-content">
                         <h4 class="font-bold text-lg mb-2">スマート機能、IoT、ウェアラブル</h4>
-                        <p class="text-gray-600">リアルタイムでのアラート、データ記録、遠隔監視を可能にするスマート機能やIoT統合が標準化しつつあります。特に、ヘルメットや手首に装着するウェアラブルセンサーは、個人の状態を継続的に監視し、パーソナライズされた予防策を提供するための重要なトレンドとなっています。厚生労働省の実証実験でもその有効性が示されており、産業界での導入が加速しています。</p>
+                        <p class="text-gray-600">リアルタイムでのアラート、データ記録、遠隔監視を可能にするスマート機能やIoT統合が標準化しつつあります<sup><a href="#ref1">[1]</a></sup>。特に、ヘルメットや手首に装着するウェアラブルセンサーは、個人の状態を継続的に監視し、パーソナライズされた予防策を提供するための重要なトレンドとなっています<sup><a href="#ref2">[2]</a></sup>。厚生労働省の実証実験でもその有効性が示されており、産業界での導入が加速しています<sup><a href="#ref3">[3]</a></sup>。</p>
                     </div>
                     <div id="tab-content-heat-demand" class="tab-content">
                         <h4 class="font-bold text-lg mb-2">労働安全衛生が重要な産業</h4>
@@ -169,10 +183,11 @@
                     <div id="tab-content-heat-players" class="tab-content">
                         <h4 class="font-bold text-lg mb-2">国内外の主要企業</h4>
                         <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li><span class="font-semibold">グローバル:</span> Honeywell, 3M, Dräger, MSA Safety 等</li>
-                            <li><span class="font-semibold">日本 (WBGT計):</span> エー・アンド・デイ (A&D), 佐藤計量器製作所, 京都電子工業, タニタ 等</li>
-                            <li><span class="font-semibold">日本 (ウェアラブル):</span> ヒロ・コーポレーション, リンクサス, タイムマシーン 等</li>
+                            <li><span class="font-semibold">グローバル:</span> Honeywell, DuPont, 3M, Dräger, Ansell, MSA Safety, Kimberly-Clark, 大塚製薬, PIP, Pyramex, Radians, Sqwincher, Allegro Industries, Ergodyne, Occunomix など<sup><a href="#ref1">[1]</a></sup></li>
+                            <li><span class="font-semibold">日本 (WBGT計):</span> エー・アンド・デイ (A&D) (<a href="#ref5">[5]</a>, <a href="#ref13">[13]</a>), 佐藤計量器製作所, 京都電子工業, タニタ, エンペックス気象計, カスタム, 理研化学株式会社 など<sup><a href="#ref8">[8]</a></sup></li>
+                            <li><span class="font-semibold">日本 (ウェアラブル):</span> ヒロ・コーポレーション (<a href="#ref13">[13]</a>), リンクサス (<a href="#ref13">[13]</a>), タイムマシーン (<a href="#ref10">[10]</a>, <a href="#ref13">[13]</a>) など</li>
                         </ul>
+                        <p class="text-gray-600 text-sm mt-2">製品は、携帯型WBGT計（例：A&Dの「みはりん坊」シリーズ）から、アラーム機能やデータロギング機能を備えた高度なモニターまで多岐にわたります<sup><a href="#ref5">[5]</a></sup>。ウェアラブル型は手首装着型やバンド型で継続的な個人モニタリングを可能にし<sup><a href="#ref2">[2]</a></sup>、一部システムは遠隔監視やクラウド連携にも対応しています<sup><a href="#ref10">[10]</a></sup>。</p>
                     </div>
                 </div>
             </div>
@@ -197,17 +212,22 @@
                     <div class="chart-container mx-auto">
                         <canvas id="hypothermiaMarketChart"></canvas>
                     </div>
+                    <ul class="list-disc list-inside text-gray-600 text-sm mt-4 space-y-1">
+                        <li><span class="font-semibold">体温管理市場:</span> 2024年に32.1億米ドルと推定され、2029年までに38.7億米ドルに達し、CAGR 3.88%で成長予測<sup><a href="#ref14">[14]</a></sup>。主に医療用途に牽引。</li>
+                        <li><span class="font-semibold">温度計市場:</span> 2023年に1.8億米ドルと評価され、2032年までに3億米ドルに達し、CAGR 6.5%で成長予測<sup><a href="#ref16">[16]</a></sup>。</li>
+                        <li><span class="font-semibold">湿度センサー市場:</span> 2024年に6.9億米ドルと推定され、2029年には9.9億米ドルに達し、CAGR 7.66%で成長予測<sup><a href="#ref17">[17]</a></sup>。</li>
+                    </ul>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
                     <h3 class="text-xl font-bold mb-4">市場促進要因とトレンド</h3>
                     <div class="space-y-4">
                         <div>
                             <h4 class="font-semibold text-indigo-700">労働安全衛生からの需要</h4>
-                            <p class="text-gray-600 text-sm">事務所衛生基準規則などにより、事業者は職場を一定の温度（例：18℃以上28℃以下）に保つ努力義務があります。これを遵守するために、汎用的な温度・湿度計への需要が生まれます。</p>
+                            <p class="text-gray-600 text-sm">事務所衛生基準規則などにより、事業者は職場を一定の温度（例：18℃以上28℃以下、10℃以下の場合の暖房義務）に保つ努力義務があります<sup><a href="#ref18">[18]</a></sup>。これを遵守するために、汎用的な温度・湿度計への需要が生まれます。</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-indigo-700">技術革新</h4>
-                            <p class="text-gray-600 text-sm">高精度で耐久性の高い温度・湿度センサーの開発が進んでおり、過酷な寒冷環境下でも信頼性の高いモニタリングが可能になっています。</p>
+                            <p class="text-gray-600 text-sm">高精度で耐久性の高い温度・湿度センサー（例：E+E Elektronik社のHTS801やSensirion社のSHT4xシリーズ）の開発が進んでおり<sup><a href="#ref17">[17]</a></sup>、過酷な寒冷環境下でも信頼性の高いモニタリングが可能になっています。</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-indigo-700">市場の特性</h4>
@@ -224,20 +244,20 @@
                         <div>
                             <h4 class="font-bold text-lg mb-2">温度計メーカー</h4>
                             <ul class="list-disc list-inside text-gray-600 text-sm">
-                                <li>3M, A&D, オムロン, テルモ 等</li>
+                                <li>3M Company, A&D株式会社, American Diagnostic Corporation, Baxter International, Briggs Healthcare, オムロンヘルスケア株式会社, テルモ株式会社 など<sup><a href="#ref16">[16]</a></sup></li>
                             </ul>
                         </div>
                         <div>
                             <h4 class="font-bold text-lg mb-2">湿度センサーメーカー</h4>
                             <ul class="list-disc list-inside text-gray-600 text-sm">
-                                <li>Honeywell, TE Connectivity 等</li>
+                                <li>General Electric Company, Laird Connectivity, E+E Elektronik GmbH, Honeywell International Inc., TE Connectivity Ltd. など<sup><a href="#ref17">[17]</a></sup></li>
                             </ul>
                         </div>
                          <div class="sm:col-span-2">
-                            <h4 class="font-bold text-lg mb-2">その他</h4>
+                            <h4 class="font-bold text-lg mb-2">その他関連製品</h4>
                             <ul class="list-disc list-inside text-gray-600 text-sm">
-                                <li>赤外線サーモグラフィー (FLIR, Testo)</li>
-                                <li>特定用途製品 (例: 牛舎用寒冷ストレス計)</li>
+                                <li><span class="font-semibold">赤外線サーモグラフィー:</span> フリアーシステムズジャパン, 株式会社テストー, Micro-Epsilon Japan株式会社 など<sup><a href="#ref19">[19]</a></sup> (建物の診断や設備検査、コールドスポット評価に応用可能)</li>
+                                <li><span class="font-semibold">特定用途製品:</span> エンペックス気象計の牛舎環境における「寒冷ストレス」計など<sup><a href="#ref12">[12]</a></sup></li>
                             </ul>
                         </div>
                     </div>
@@ -252,6 +272,15 @@
             </div>
             <div class="max-w-4xl mx-auto space-y-8">
                 <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-2">広範な環境モニタリング市場との相乗効果</h3>
+                    <p class="text-gray-600">熱中症および低体温症予防のための環境測定機器は、より大きな環境モニタリング市場の専門化されたセグメントに位置付けられます。この広範な市場は堅調に成長しており、2023年には146.4億米ドルと評価され、2030年までに240.2億米ドルに達し、CAGR 7.33%で成長すると予測されています<sup><a href="#ref20">[20]</a></sup>。工業化、都市化、政府の積極的な政策、CSRの増加がこの成長を促進しています<sup><a href="#ref20">[20]</a></sup>。</p>
+                    <h3 class="text-xl font-bold mt-6 mb-2">小型化、接続性、データ分析の役割</h3>
+                    <p class="text-gray-600">小型化された統合センサーとIoT接続性、データ分析機能の組み合わせは、リアルタイムデータ収集、遠隔監視、予測分析、自動アラートを可能にし、能動的なリスク管理へと変革しています。これは特に熱中症予防市場で顕著であり、ウェアラブルセンサーからの生体データ分析は熱中症予防に有用であることが示されています<sup><a href="#ref3">[3]</a></sup>。</p>
+                    <h3 class="text-xl font-bold mt-6 mb-2">地域市場の多様性と機会</h3>
+                    <p class="text-gray-600">アジア太平洋地域は湿度センサー市場で最も急速に成長しており、最大の市場でもあります<sup><a href="#ref17">[17]</a></sup>。熱中症予防製品市場全体では北米が約37%の最大の市場シェアを占めていますが、アジア太平洋地域の急速な工業化と労働安全衛生への関心の高まりは、環境測定機器にとって重要な成長地域としての地位を確立しています。</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
                     <h3 class="text-xl font-bold mb-2">市場機会と課題</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -260,13 +289,14 @@
                                 <li>日本の規制改正による熱中症対策市場の爆発的成長。</li>
                                 <li>ウェアラブル、IoT技術の普及による高付加価値化。</li>
                                 <li>アジア太平洋地域の工業化に伴う安全意識の高まり。</li>
+                                <li>広範な環境モニタリング市場の成長エコシステム。</li>
                             </ul>
                         </div>
                         <div>
                             <h4 class="font-semibold text-red-600">課題</h4>
                              <ul class="list-disc list-inside text-gray-600 mt-2 space-y-1">
                                 <li>低体温症対策市場の定義が曖昧で、ターゲット設定が困難。</li>
-                                <li>高機能なモニタリングソリューションのコスト。</li>
+                                <li>高機能なモニタリングソリューションのコスト<sup><a href="#ref20">[20]</a></sup>。</li>
                                 <li>サプライチェーンの混乱リスク。</li>
                             </ul>
                         </div>
@@ -275,9 +305,9 @@
                 <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
                     <h3 class="text-xl font-bold mb-2">戦略的提言</h3>
                      <ul class="list-disc list-inside text-gray-600 mt-2 space-y-2">
-                        <li><span class="font-semibold">熱中症対策:</span> 日本の規制に対応した、データ記録・通信機能付きWBGT計やウェアラブルデバイスの開発を優先する。使いやすさと規制遵守をアピールする。</li>
-                        <li><span class="font-semibold">低体温症対策:</span> 専用機ではなく、既存のビル管理やHVACシステムに統合できる高精度センサーに注力する。ニッチな産業用途を開拓する。</li>
-                        <li><span class="font-semibold">共通:</span> センサーの小型化とコスト削減を進め、導入のハードルを下げる。データサービス等のサブスクリプションモデルも検討する。</li>
+                        <li><span class="font-semibold">熱中症対策:</span> 日本の規制に対応した、データ記録・通信機能付きWBGT計やウェアラブルデバイスの開発を優先する。使いやすさと規制遵守をアピールする。日本の安全コンサルタントや業界団体との戦略的提携も有効。</li>
+                        <li><span class="font-semibold">低体温症対策:</span> 専用機ではなく、既存のビル管理やHVACシステムに統合できる高精度センサーに注力する。寒冷ストレスが重大な測定可能なリスクとなるニッチな産業用途を開拓する。将来的な「寒冷ストレス指数」の標準化に備えた研究開発も検討。</li>
+                        <li><span class="font-semibold">共通:</span> センサーの小型化とコスト削減を進め、導入のハードルを下げる。データサービス等のサブスクリプションモデルも検討する。世界の労働安全衛生規制の動向を継続的に監視することが推奨される。</li>
                     </ul>
                 </div>
             </div>
@@ -288,6 +318,7 @@
     <footer class="bg-gray-800 text-white mt-12 py-6">
         <div class="container mx-auto px-4 text-center text-sm">
             <p>このダッシュボードは提供された市場調査レポートに基づき生成されました。</p>
+            <p>各数値に付随する参照番号は、元のレポートで言及された情報源を示します。実際のリンクは提供されたレポートに含まれていないため、プレースホルダーとして機能します。</p>
             <p>&copy; 2025 Interactive Market Analysis. All rights reserved.</p>
         </div>
     </footer>
@@ -296,6 +327,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const heatstrokeNav = document.getElementById('nav-heatstroke');
             const hypothermiaNav = document.getElementById('nav-hypothermia');
+            const summaryNav = document.getElementById('nav-summary');
             
             const heatstrokeContent = document.getElementById('content-heatstroke');
             const hypothermiaContent = document.getElementById('content-hypothermia');
@@ -314,6 +346,7 @@
 
                 heatstrokeNav.classList.remove('active');
                 hypothermiaNav.classList.remove('active');
+                summaryNav.classList.remove('active');
 
                 if (section === 'heatstroke') {
                     heatstrokeContent.classList.add('active');
@@ -327,19 +360,25 @@
                     if (!hypothermiaChart) {
                         renderHypothermiaChart();
                     }
+                } else if (section === 'summary') {
+                    summaryContent.classList.add('active');
+                    summaryNav.classList.add('active');
                 }
             }
 
             heatstrokeNav.addEventListener('click', () => showSection('heatstroke'));
             hypothermiaNav.addEventListener('click', () => showSection('hypothermia'));
+            summaryNav.addEventListener('click', () => showSection('summary'));
 
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tabId = button.dataset.tab;
-                    
+                    const currentSectionPrefix = tabId.split('-')[0]; // 'heat' or 'hypo'
+
                     tabButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        if(btn.dataset.tab.startsWith(tabId.split('-')[0])) {
+                        // Only deactivate tabs belonging to the current section
+                        if(btn.dataset.tab.startsWith(currentSectionPrefix)) {
+                           btn.classList.remove('active');
                            document.getElementById(`tab-content-${btn.dataset.tab}`).classList.remove('active');
                         }
                     });
@@ -433,8 +472,10 @@
                 });
             }
 
+            // Initial display and tab activation
             showSection('heatstroke');
-            document.querySelector('[data-tab="heat-tech"]').click();
+            // Activate the first tab for the heatstroke section initially
+            document.querySelector('#content-heatstroke .tab-button').click();
         });
     </script>
 
